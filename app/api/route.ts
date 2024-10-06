@@ -3,7 +3,11 @@ import { NextResponse , NextRequest } from "next/server";
 
 const db = new PrismaClient();
 export async function GET() {
-    const dates = await db.time.findMany();
+    const dates = await db.time.findMany({
+        orderBy: {
+            time: "asc"
+        }
+    });
     return NextResponse.json({ dates });
 }
 
